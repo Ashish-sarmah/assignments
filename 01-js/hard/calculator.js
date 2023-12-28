@@ -33,9 +33,25 @@ class Calculator {
   getResult (){
   return this.result}
 
-  calculate(str){
-     this.result = new Function('return ' + str)()
+   checkInput(str){
+    const arr = ['+','*', '-','/','(',')',' ', '0','1','2','3','4','5','6','7','8','9']
+    for(let ele of str){
+      const found = arr.find((el) => {
+        return el === ele;
+      });
+      if(found === undefined)
+      return false;
+    }
+    return true;
   }
+
+  calculate(str){
+    if(this.checkInput(str))
+     this.result = new Function('return ' + str)()
+    else
+    console.log("Invalid expression!")
+  }
+}
 }
 
 const ans = new Calculator();
